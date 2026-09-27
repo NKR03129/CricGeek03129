@@ -1,0 +1,42 @@
+.git
+.next
+node_modules
+ollama-proxy/node_modules
+venv
+**/venv
+**/__pycache__
+tsconfig.tsbuildinfo
+.env
+.env.local
+.env*.local
+analysis
+frontend
+rag
+reports
+python
+cloudflare
+launchd
+ollama-proxy
+cricgeek.sql
+*.pdf
+
+# Keep only the exact AI/insights files referenced by vercel.json
+ai_service/**
+!ai_service/
+!ai_service/t20_api.py
+!ai_service/t20_insights.py
+
+capstone cric/**
+!capstone cric/
+!capstone cric/cricket_metrics.py
+!capstone cric/evaluator.py
+!capstone cric/outputs/
+!capstone cric/outputs/aggregated_df.pkl
+!capstone cric/outputs/bowling_over_df.pkl
+!capstone cric/outputs/entries_with_perf.pkl
+!capstone cric/outputs/eval_results.pkl
+!capstone cric/outputs/player_gender_map.pkl
+!capstone cric/outputs/player_image_urls.json
+!capstone cric/outputs/player_team_map.json
+!capstone cric/outputs/team_players_map.json
+!capstone cric/outputs/teams_list.pkl

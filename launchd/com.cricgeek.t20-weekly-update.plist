@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  CricGeek T20 Weekly Update — launchd Agent
+  ==========================================
+  This LaunchAgent runs the weekly data import + artifact rebuild every Sunday at 03:00.
+
+  INSTALLATION (one-time setup):
+  ──────────────────────────────
+  1. Copy this file to ~/Library/LaunchAgents/:
+       cp launchd/com.cricgeek.t20-weekly-update.plist ~/Library/LaunchAgents/
+
+  2. Open the file and replace the two <PROJECT_ROOT> placeholders with the
+     actual absolute path to your cricgeek project directory (e.g. /Users/yourname/cricgeek).
+     Also set the correct <PYTHON_EXE> path (your venv's python, e.g.
+     /Users/yourname/cricgeek/insights_service/.venv/bin/python).
+
+  3. Load the agent:
+       launchctl load ~/Library/LaunchAgents/com.cricgeek.t20-weekly-update.plist
+
+  4. To trigger a manual test run:
+       launchctl start com.cricgeek.t20-weekly-update
+
+  5. To unload:
+       launchctl unload ~/Library/LaunchAgents/com.cricgeek.t20-weekly-update.plist
+
+  ENVIRONMENT:
+  ── The SPORTMONKS_API_TOKEN is read from the project .env file by
+     sportmonks_importer.py, so you do NOT need to add it to EnvironmentVariables here.
+-->
+<plist version="1.0">
+<dict>
+    <!-- Unique identifier for this agent -->
+    <key>Label</key>
+    <string>com.cricgeek.t20-weekly-update</string>
+
+    <!--
+        Replace <PROJECT_ROOT> with the absolute path to your cricgeek directory.
+        Replace <PYTHON_EXE> with the Python interpreter inside the insights venv.
+
+        Example values:
+            /Users/adityauppuluri/cricgeek
+            /Users/adityauppuluri/cricgeek/insights_service/.venv/bin/python
+    -->
+    <key>ProgramArguments</key>
+    <array>
+        <string><PYTHON_EXE></string>
+        <string>-m</string>
+        <string>insights_service.weekly_update</string>
+    </array>
+
+    <!-- Run from the project root so relative imports work -->
+    <key>WorkingDirectory</key>
+    <string><PROJECT_ROOT></string>
+
+    <!-- Run every Sunday at 03:00 local time -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>0</integer><!-- 0 = Sunday -->
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <!-- Log files — update path to match PROJECT_ROOT -->
+    <key>StandardOutPath</key>
+    <string><PROJECT_ROOT>/data/logs/t20_weekly_update_launchd.log</string>
+
+    <key>StandardErrorPath</key>
+    <string><PROJECT_ROOT>/data/logs/t20_weekly_update_launchd_err.log</string>
+
+    <!-- Keep the agent alive across login sessions -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- Restart on non-zero exit code (up to 3 times at 60s intervals) -->
+    <key>KeepAlive</key>
+    <false/>
+</dict>
+</plist>

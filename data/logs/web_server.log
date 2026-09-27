@@ -1,0 +1,6 @@
+2024-05-02T10:15:02Z 10.0.0.14 GET /docs 200 35ms
+2024-05-02T10:15:04Z 10.0.0.18 POST /query 500 212ms upstream_timeout
+2024-05-02T10:15:04Z 10.0.0.18 POST /query 500 198ms upstream_timeout
+2024-05-02T10:15:05Z 10.0.0.18 POST /query 500 205ms upstream_timeout
+2024-05-02T10:15:06Z 10.0.0.18 POST /query 429 5ms rate_limited
+2024-05-02T10:15:08Z 10.0.0.25 GET /healthz 200 6ms

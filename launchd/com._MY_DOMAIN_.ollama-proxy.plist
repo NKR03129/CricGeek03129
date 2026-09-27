@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.<MY_DOMAIN>.ollama-proxy</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/env</string>
+    <string>node</string>
+    <string><ABSOLUTE_PATH_TO_PROJECT>/ollama-proxy/server.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string><ABSOLUTE_PATH_TO_PROJECT>/ollama-proxy</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PORT</key>
+    <string>5050</string>
+    <key>OLLAMA_UPSTREAM</key>
+    <string>http://127.0.0.1:11434</string>
+    <key>OLLAMA_SHARED_SECRET</key>
+    <string><MY_SHARED_SECRET></string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/<MY_USERNAME>/Library/Logs/ollama-proxy.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/<MY_USERNAME>/Library/Logs/ollama-proxy.error.log</string>
+</dict>
+</plist>

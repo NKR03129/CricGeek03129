@@ -1,0 +1,7 @@
+tunnel: <TUNNEL_ID>
+credentials-file: /Users/<MY_USERNAME>/.cloudflared/<TUNNEL_ID>.json
+
+ingress:
+  - hostname: ollama-api.<MY_DOMAIN>
+    service: http://localhost:5050
+  - service: http_status:404

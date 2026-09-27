@@ -1,0 +1,415 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cg-green: #22C55E;
+  --color-cg-green-dark: #16A34A;
+  --color-cg-green-light: #4CAF50;
+  --color-cg-dark: #0A0A0A;
+  --color-cg-dark-2: #111111;
+  --color-cg-dark-3: #1A1A2E;
+  --color-cg-accent: #0A1A0A;
+  --color-cg-white: #FFFFFF;
+  --color-cg-gray-100: #F5F5F5;
+  --color-cg-gray-200: #E0E0E0;
+  --color-cg-gray-700: #374151;
+  --color-cg-gray-800: #1f2937;
+  /* Award tier colors */
+  --color-cg-gold: #FFD700;
+  --color-cg-silver: #C0C0C0;
+  --color-cg-bronze: #CD7F32;
+  --color-cg-platinum: #E5E4E2;
+  /* Scoring colors */
+  --color-cg-score-high: #22C55E;
+  --color-cg-score-mid: #FBBF24;
+  --color-cg-score-low: #EF4444;
+}
+
+html {
+  background-color: #0A0A0A;
+}
+
+body {
+  background-color: #0A0A0A;
+  color: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22C55E;
+}
+
+/* Animations */
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+  }
+}
+
+.pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Smooth page transitions */
+main {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Score ring animation */
+@keyframes scoreReveal {
+  from {
+    stroke-dashoffset: var(--score-circumference, 283);
+  }
+  to {
+    stroke-dashoffset: var(--score-offset, 0);
+  }
+}
+
+.score-ring-animated {
+  animation: scoreReveal 1.5s ease-out forwards;
+}
+
+/* DNA radar chart pulse */
+@keyframes radarPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.radar-pulse {
+  animation: radarPulse 3s ease-in-out infinite;
+}
+
+/* Badge shine effect */
+@keyframes badgeShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.badge-shine {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: badgeShine 3s ease-in-out infinite;
+}
+
+/* Ball delivered animation */
+@keyframes ballBounce {
+  0% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+  50% { transform: translateY(10px) scale(1.1); opacity: 1; }
+  70% { transform: translateY(-5px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.ball-bounce {
+  animation: ballBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Stump hit animation */
+@keyframes stumpHit {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(5deg); }
+  80% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.stump-hit {
+  animation: stumpHit 0.6s ease-out;
+}
+
+@keyframes eqsBallOrbit {
+  0% {
+    transform: translate(-24px, -8px) scale(0.9);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translate(24px, -20px) scale(1);
+  }
+  50% {
+    transform: translate(32px, 8px) scale(1.05);
+  }
+  75% {
+    transform: translate(-12px, 22px) scale(0.98);
+  }
+  100% {
+    transform: translate(-24px, -8px) scale(0.9);
+    opacity: 0.8;
+  }
+}
+
+@keyframes eqsBatsmanWait {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(-1deg);
+  }
+}
+
+@keyframes eqsScoreTick {
+  0%,
+  100% {
+    transform: translateY(0);
+    letter-spacing: 0.16em;
+  }
+  50% {
+    transform: translateY(-2px);
+    letter-spacing: 0.22em;
+  }
+}
+
+.eqs-ball-orbit {
+  animation: eqsBallOrbit 2s linear infinite;
+}
+
+.eqs-batsman-wait {
+  animation: eqsBatsmanWait 1.8s ease-in-out infinite;
+}
+
+.eqs-score-tick {
+  animation: eqsScoreTick 1.2s ease-in-out infinite;
+}
+
+/* Pipeline step check animation */
+@keyframes checkReveal {
+  0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.check-reveal {
+  animation: checkReveal 0.3s ease-out forwards;
+}
+
+/* Shimmer loading for pipeline */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #1a1a2e 0%, #2a2a3e 50%, #1a1a2e 100%);
+  background-size: 400px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* XP bar fill animation */
+@keyframes xpFill {
+  from { width: 0%; }
+}
+
+.xp-fill {
+  animation: xpFill 1s ease-out forwards;
+}
+
+/* Floating number animation for score */
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-30px); }
+}
+
+.float-up {
+  animation: floatUp 1.5s ease-out forwards;
+}
+
+/* Over counter bar */
+.over-counter-track {
+  background: linear-gradient(90deg,
+    #22C55E 0%,
+    #22C55E var(--over-progress, 0%),
+    #1f2937 var(--over-progress, 0%),
+    #1f2937 100%
+  );
+  transition: --over-progress 0.3s ease;
+}
+
+/* Match scorecard theatre */
+@keyframes inningsGlow {
+  0%,
+  100% {
+    transform: translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 0.65;
+  }
+}
+
+@keyframes inningsReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ballActiveLift {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.06);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+@keyframes ballClickSnap {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0.9);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes seamRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rowReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.innings-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.innings-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% -8%, rgba(34, 197, 94, 0.12), transparent 42%),
+    radial-gradient(circle at 85% 8%, rgba(56, 163, 255, 0.14), transparent 35%);
+  pointer-events: none;
+  z-index: -1;
+  animation: inningsGlow 8s ease-in-out infinite;
+}
+
+.innings-content-reveal {
+  animation: inningsReveal 0.45s ease both;
+}
+
+.innings-ball-rack {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  border-radius: 999px;
+  border: 1px solid rgba(172, 236, 197, 0.14);
+  background: rgba(11, 19, 16, 0.78);
+  padding: 0.34rem 0.48rem;
+  padding-block-end: 0.125rem;
+}
+
+.innings-ball-trigger {
+  display: inline-flex;
+  min-inline-size: 6.2rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(181, 228, 199, 0.22);
+  background: linear-gradient(120deg, rgba(16, 26, 22, 0.95), rgba(13, 21, 18, 0.82));
+  padding: 0.38rem 0.56rem;
+  transition: transform 0.2s ease, filter 0.2s ease, border-color 0.2s ease;
+}
+
+.innings-ball-trigger:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+  border-color: color-mix(in srgb, var(--team-accent, #22c55e) 50%, #d8f4e3 50%);
+}
+
+.inning-ball-code {
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--team-accent, #22c55e) 62%, #ffffff 38%);
+  background: color-mix(in srgb, var(--team-accent, #22c55e) 18%, #0f1512 82%);
+  color: color-mix(in srgb, var(--team-accent, #22c55e) 70%, #ffffff 30%);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  padding: 0.28rem 0.56rem;
+}
+
+.innings-ball-trigger.is-active {
+  border-color: color-mix(in srgb, var(--team-accent, #22c55e) 72%, #ffffff 28%);
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--team-accent, #22c55e) 18%, #0f1a15 82%),
+    rgba(13, 21, 18, 0.9)
+  );
+  box-shadow:
+    inset 0 -8px 16px rgba(0, 0, 0, 0.32),
+    0 6px 14px rgba(0, 0, 0, 0.32),
+    0 0 0 2px color-mix(in srgb, var(--team-accent, #22c55e) 28%, transparent 72%);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.innings-ball-trigger.is-clicked {
+  animation: ballClickSnap 240ms cubic-bezier(0.32, 1.5, 0.64, 1);
+}
+
+.scorecard-shell {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), transparent 18%),
+    linear-gradient(0deg, rgba(6, 8, 9, 0.28), rgba(6, 8, 9, 0.28));
+}
+
+.scorecard-row-reveal {
+  opacity: 0;
+  animation: rowReveal 0.35s ease forwards;
+}
