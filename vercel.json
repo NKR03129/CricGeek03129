@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "experimentalServices": {
+    "web": {
+      "entrypoint": ".",
+      "routePrefix": "/",
+      "framework": "nextjs"
+    },
+    "insights": {
+      "entrypoint": "insights_service/main.py",
+      "routePrefix": "/_insights",
+      "framework": "fastapi",
+      "memory": 2048,
+      "maxDuration": 120,
+      "includeFiles": [
+        "insights_service/t20_insights.py",
+        "insights_service/cricket_metrics.py",
+        "insights_service/evaluator.py",
+        "insights_service/outputs/**"
+      ]
+    }
+  }
+}

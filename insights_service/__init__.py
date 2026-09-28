@@ -1,0 +1,1 @@
+"""CricGeek insights service package."""

@@ -1,0 +1,5 @@
+2024-05-02 10:15:03 connection failed: timeout connecting to primary db-host-0:5432
+2024-05-02 10:15:04 connection failed: timeout connecting to primary db-host-0:5432
+2024-05-02 10:15:05 promotion: replica db-host-1 elected as new primary after 3 failures
+2024-05-02 10:15:06 connection established: db-host-1:5432
+2024-05-02 10:15:06 slow query: SELECT * FROM chunks WHERE doc_id='cloud_rag_overview' duration=892ms

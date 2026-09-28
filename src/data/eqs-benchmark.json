@@ -1,0 +1,312 @@
+[
+  {
+    "id": "eqs-hq-001",
+    "title": "Bumrah's hard length did the damage, not the yorker",
+    "content": "Jasprit Bumrah barely bowled a yorker tonight, and that is exactly why the chase collapsed. He bowled the hard length into the surface, kept dragging the batters back across the crease, and made the short boundary irrelevant. Between overs eleven and sixteen the batters had to manufacture pace, and the false-shot rate climbed because nobody could get under the ball. The two wickets in that window were both mishits to the leg side, not beaten-for-pace dismissals. That is a bowler reading a slow pitch and adjusting, rather than repeating the plan that makes highlight reels.\n\nThe interesting question is whether this becomes the template away from home. On surfaces with more carry, the hard length sits up and gets hit. Tonight it worked because the ball gripped.",
+    "category": "high-quality-human",
+    "dna": { "analyst": 70, "debater": 20, "fan": 10 },
+    "groundTruth": { "band": "high" },
+    "notes": "Analyst voice, specific phase-based evidence, self-limiting conclusion."
+  },
+  {
+    "id": "eqs-hq-002",
+    "title": "The night the stands went quiet at Eden",
+    "content": "There is a particular silence that only a full Eden Gardens can produce. It arrived in the eighteenth over, after the second six, when eighty thousand people realised the game had left them. I have sat in that upper tier since I was nine, and I have never heard the noise drain out of a ground so quickly.\n\nWhat I remember is not the shot. It is the man two rows down who stopped filming halfway through and just put his phone in his pocket. His son kept asking him what the required rate was, and he kept saying it was fine, and both of them knew it was not fine. That is what a chase does to a crowd. The scorecard says the margin was seven runs. The stands knew an over earlier.",
+    "category": "high-quality-human",
+    "dna": { "storyteller": 75, "fan": 25 },
+    "groundTruth": { "band": "high" },
+    "notes": "Storyteller voice, no stats, high originality and narrative flow. Tests that a stat-free piece is not punished for a storyteller DNA."
+  },
+  {
+    "id": "eqs-hq-003",
+    "title": "The case against picking a fourth seamer here",
+    "content": "The argument for a fourth seamer rests on the new-ball record, and that record is real. But it answers a question this venue does not ask. The last six matches here have been decided between overs seven and fifteen, and in that window seam has gone at over nine an over while spin has gone at under seven.\n\nTo be fair to the other side of this, the spin option is unproven against left-handers, and the opposition top three has two. That is a genuine risk and it is the strongest counter-argument available. I still think it is the smaller risk, because the alternative is bowling your fourth seamer in exactly the phase where seam has been least effective. Pick the spinner, and accept that you may need a plan for the left-handers rather than avoiding the matchup entirely.",
+    "category": "high-quality-human",
+    "dna": { "debater": 70, "analyst": 30 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true },
+    "notes": "Debater voice, acknowledges the counter-argument explicitly."
+  },
+  {
+    "id": "eqs-hq-004",
+    "title": "Why our middle order keeps getting stuck",
+    "content": "I love this team and I am tired of watching the same thing happen. We get through the powerplay well, and then somebody decides that overs seven to twelve are for consolidation. They are not. They are for taking the spinner down before he settles into a line.\n\nYou can see it in the body language. The single gets taken, the bat gets tapped, and the over goes for four. Then two overs later somebody has to hit over the top from nowhere and holes out, and the commentary calls it a rash shot. It was not rash. It was the bill arriving for five quiet overs. Fix the intent in the middle, and the rash shots mostly disappear on their own.",
+    "category": "high-quality-human",
+    "dna": { "fan": 60, "analyst": 25, "debater": 15 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true },
+    "notes": "Fan voice with real criticism. Must NOT be scored as toxic."
+  },
+  {
+    "id": "eqs-crit-001",
+    "title": "This selection policy is failing the middle order",
+    "content": "The selection panel has now used five different number four batters in eleven matches, and the results are exactly what you would predict. Nobody has faced more than sixty balls in the position. Nobody has been given a chance to fail and recover.\n\nThis is a poor process and it deserves to be called poor. It is not bad luck and it is not a batting problem. It is a planning problem, and it is the panel's to own. The fix is not complicated: pick one player, tell them they have six matches, and let them learn the role in public. Every side that has stabilised a middle order in the last decade has done some version of that. The current approach guarantees the churn it is supposedly trying to solve.",
+    "category": "strong-criticism",
+    "dna": { "debater": 55, "analyst": 45 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true },
+    "notes": "Harsh but evidence-led and constructive. Core false-positive test for toxicity."
+  },
+  {
+    "id": "eqs-crit-002",
+    "title": "That was the worst captaincy decision of the season",
+    "content": "Bowling the part-time spinner in the nineteenth over with a left-hander on strike and the short boundary on the leg side was indefensible, and it cost the match. I want to be precise about why, because \"bad captaincy\" is usually a lazy verdict.\n\nThere were two frontline bowlers with an over left. Both had conceded under seven an over. The bowler who was chosen had not bowled in the second half of an innings all season. The decision traded a known outcome for an unknown one while protecting nothing. That is the definition of a poor process decision, separate from whether it happened to work.\n\nThe captain has been excellent at other things this season, and this is not a referendum on him. It is one decision, and it was the wrong one.",
+    "category": "strong-criticism",
+    "dna": { "debater": 50, "analyst": 35, "fan": 15 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true },
+    "notes": "Very negative sentiment with reasoning and fair framing. Must score high."
+  },
+  {
+    "id": "eqs-crit-003",
+    "title": "Disappointing, and the numbers say it is not variance",
+    "content": "Nine innings, one score above thirty, and a strike rate under a hundred in the phase he was picked to attack. At some point the sample stops being small. I have defended him for most of this season on the basis that the role was unclear, but the role has been clear for six weeks now.\n\nThis is a disappointing run and pretending otherwise does not help him. What would help is a spell in the middle order where he can face spin without a required rate on his shoulders. He has done that before and it worked. The current plan is not working and continuing it is the actual risk.",
+    "category": "strong-criticism",
+    "dna": { "analyst": 60, "debater": 25, "fan": 15 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true }
+  },
+  {
+    "id": "eqs-sarc-001",
+    "title": "A masterclass in suspense",
+    "content": "What a visionary innings. Truly inspiring stuff. Scoring at four an over in a T20 chase is obviously the new tactical frontier, and we are all just too slow to appreciate it. Rotating the strike is clearly a rare art form now, best preserved for special occasions, and running between the wickets has apparently become an optional feature of the sport.\n\nBy the time he finally got going, we had entered a different geological era. The required rate had become forbidden knowledge. But sure, a masterclass. Really. Genius.",
+    "category": "sarcasm",
+    "dna": { "fan": 50, "debater": 50 },
+    "groundTruth": { "band": "low", "sarcastic": true, "toxic": true },
+    "notes": "Mock praise used to ridicule a person, with no cricket substance. Sarcasm and toxicity must both fire."
+  },
+  {
+    "id": "eqs-sarc-002",
+    "title": "Obviously a brilliant plan",
+    "content": "Brilliant. Absolutely brilliant. Opening with the spinner against two left-handers who average sixty against spin was obviously the move nobody else was smart enough to see. Of course it was. The rest of us simply lack the vision.\n\nAnd naturally the follow-up was to bowl him again in the powerplay, because if a plan fails once the answer is clearly to do it twice. Legendary thinking. We are all learning so much.",
+    "category": "sarcasm",
+    "dna": { "debater": 60, "fan": 40 },
+    "groundTruth": { "band": "low", "sarcastic": true },
+    "notes": "Sarcasm aimed at a decision rather than a person. Should flag sarcasm; toxicity is borderline."
+  },
+  {
+    "id": "eqs-sarc-003",
+    "title": "Sure, the pitch was the problem",
+    "content": "Apparently the surface was unplayable. That is why the opposition chased it down with four overs to spare on the same pitch, in the same conditions, against the same ball. Clearly a completely different surface by then. Geology moves fast these days.\n\nYeah right. The pitch was fine. We were eighty for six because three players played the wrong shot to the wrong ball, which is a harder thing to put in a press conference.",
+    "category": "sarcasm",
+    "dna": { "debater": 55, "analyst": 30, "fan": 15 },
+    "groundTruth": { "band": "medium", "sarcastic": true },
+    "notes": "Sarcasm carrying a real argument. Should flag sarcasm but not score as low as pure mockery."
+  },
+  {
+    "id": "eqs-tox-001",
+    "title": "This guy is a complete fraud",
+    "content": "He is a pathetic excuse for an international cricketer and everyone can see it except the selectors. Absolute trash. Every single time it matters he folds, because he is mentally weak and always has been. A disgrace to the shirt.\n\nHe should be nowhere near this squad. Honestly it is embarrassing to watch. Anyone defending him is as clueless as he is.",
+    "category": "toxicity",
+    "dna": { "fan": 100 },
+    "groundTruth": { "band": "low", "toxic": true },
+    "notes": "Explicit abuse with zero analysis. Must trip the toxicity guardrail."
+  },
+  {
+    "id": "eqs-tox-002",
+    "title": "Useless selectors, useless captain, useless team",
+    "content": "Every one of them is useless. The captain is an idiot, the coach is worse, and the selectors are clearly picking names out of a hat. Stupid decisions from stupid people, week after week.\n\nI do not even know why I watch. Total garbage from top to bottom. Whoever signed off on this squad should be ashamed.",
+    "category": "toxicity",
+    "dna": { "fan": 80, "debater": 20 },
+    "groundTruth": { "band": "low", "toxic": true }
+  },
+  {
+    "id": "eqs-tox-003",
+    "title": "He is finished and it is laughable that nobody will say it",
+    "content": "Washed. Completely washed. It is laughable that we are still pretending this is a temporary dip. The man is a joke at this level now and the only people who cannot see it are the ones paid not to.\n\nObsolete. That is the word. Obsolete and being carried by reputation while better players sit at home. Pathetic from everyone involved.",
+    "category": "toxicity",
+    "dna": { "debater": 60, "fan": 40 },
+    "groundTruth": { "band": "low", "toxic": true, "sarcastic": true }
+  },
+  {
+    "id": "eqs-stat-001",
+    "title": "Kohli's 2024 numbers were unbelievable",
+    "content": "Virat Kohli scored 1,847 runs in the 2024 T20 season at an average of 94.2 and a strike rate of 212. He hit 98 sixes across 14 innings, which is a record that will stand for a decade.\n\nHe also took 31 wickets that season, making him the leading all-rounder in the competition. His economy rate of 3.1 in the powerplay was the best of any bowler who bowled more than 40 overs. These are numbers that simply do not happen at this level, and they explain why he was named player of the tournament for the fourth consecutive year.",
+    "category": "incorrect-stats",
+    "dna": { "analyst": 90, "fan": 10 },
+    "groundTruth": { "band": "low", "incorrectStats": true },
+    "notes": "Fabricated statistics presented confidently. Verification must contradict; needs search or warehouse configured to fire."
+  },
+  {
+    "id": "eqs-stat-002",
+    "title": "The chase was built on a 40-ball hundred",
+    "content": "The opener finished on 147 from 40 balls, which is the fastest hundred ever recorded in the format by a margin of nine balls. He struck 22 sixes in that innings, all of them off the spinners.\n\nThe partnership was worth 260 runs in 11 overs, which took the required rate from 12 an over down to under four. The bowler who conceded most of it went for 98 runs in his four overs, an economy of 24.5, which is also a record. The scorecard is worth looking up because the numbers barely look real.",
+    "category": "incorrect-stats",
+    "dna": { "analyst": 70, "storyteller": 30 },
+    "groundTruth": { "band": "low", "incorrectStats": true }
+  },
+  {
+    "id": "eqs-stat-003",
+    "title": "A solid all-round performance in the middle overs",
+    "content": "The middle-overs squeeze was the story. Between overs seven and fifteen the spinners conceded 52 runs and took three wickets, which is an economy a shade under six on a surface that had offered plenty earlier in the day.\n\nThe partnership that steadied things added 61 in 48 balls, not spectacular but exactly what the situation asked for. The number four faced 34 balls for his 41 and did not hit a six, which tells you how the innings was constructed. It was a chase built on rotation rather than power, and it is a useful template for this venue.",
+    "category": "mixed-quality",
+    "dna": { "analyst": 80, "fan": 20 },
+    "groundTruth": { "band": "medium" },
+    "notes": "Plausible unverifiable stats. Tests that unresolved verification stays neutral rather than punitive."
+  },
+  {
+    "id": "eqs-ai-001",
+    "title": "Exploring the Multifaceted Dynamics of Modern Cricket",
+    "content": "In the realm of modern cricket, it is important to note that the sport has undergone a significant transformation. Moreover, the intricate tapestry of strategic considerations continues to evolve in ways that underscore the complexity of the contemporary game.\n\nFurthermore, the multifaceted nature of team dynamics cannot be overstated. Teams must navigate the complex landscape of player selection while simultaneously balancing the demands of multiple formats. This delicate equilibrium is a testament to the professionalism of the modern athlete.\n\nIn conclusion, the future of cricket remains bright. The sport will undoubtedly continue to captivate audiences worldwide as it navigates the intricate challenges of the modern sporting landscape. Only time will tell what the next chapter holds.",
+    "category": "ai-paraphrase",
+    "dna": { "analyst": 40, "storyteller": 35, "fan": 25 },
+    "groundTruth": { "band": "low", "aiAssisted": true, "vague": true },
+    "notes": "Classic unedited LLM prose: no specifics, no contractions, template transitions."
+  },
+  {
+    "id": "eqs-ai-002",
+    "title": "Understanding the Importance of Powerplay Strategy",
+    "content": "The powerplay represents a crucial phase of any limited-overs cricket match. It is important to note that teams must carefully consider their approach during these overs. Furthermore, the balance between aggression and preservation of wickets is a delicate one that requires careful management.\n\nMoreover, the role of the opening batters cannot be understated. They must navigate the challenges presented by the new ball while simultaneously establishing a foundation for the innings. This dual responsibility underscores the importance of technical proficiency combined with tactical awareness.\n\nIn conclusion, powerplay strategy remains a fundamental aspect of the modern game. Teams that master this phase position themselves advantageously for subsequent phases of the contest.",
+    "category": "ai-paraphrase",
+    "dna": { "analyst": 70, "debater": 30 },
+    "groundTruth": { "band": "low", "aiAssisted": true, "vague": true }
+  },
+  {
+    "id": "eqs-ai-003",
+    "title": "The hard length is quietly reshaping death bowling",
+    "content": "Death bowling used to be a yorker competition. It is becoming a length competition, and the shift is visible in where the runs are not going.\n\nOver the last two seasons the quickest bowlers have moved roughly a foot fuller than the classic yorker slot, and the effect is that the batter has to generate every bit of the pace. Behind square, where the yorker used to leak flicks and glances, the scoring rate has dropped noticeably. Straight down the ground it has gone up, because a slightly fuller ball is easier to get under. That trade is the whole argument, and whether it is worth making depends on the ground.\n\nAt venues with long straight boundaries it is clearly worth it. At venues with a short straight side it is not, and you still need someone who can hit the base of the stumps under pressure.",
+    "category": "high-quality-human",
+    "dna": { "analyst": 85, "debater": 15 },
+    "groundTruth": { "band": "high", "aiAssisted": false },
+    "notes": "Well-structured human analysis. Guards against AI-signal false positives on clean writing."
+  },
+  {
+    "id": "eqs-vague-001",
+    "title": "Great game of cricket yesterday",
+    "content": "At the end of the day it was a very good game of cricket. Both teams played pretty well and a lot of the players did some really good things out there. Things like that are what make the game of cricket so special.\n\nSome people say the bowling was the difference and some people say it was the batting. Honestly it was probably a bit of both, sort of. Only time will tell how the rest of the season goes but there is a lot of cricket left to play. Needless to say the fans got their money's worth.",
+    "category": "vague-writing",
+    "dna": { "fan": 100 },
+    "groundTruth": { "band": "low", "vague": true },
+    "notes": "Pure filler. Relevance, evidence, and originality should all be low without any toxicity flag."
+  },
+  {
+    "id": "eqs-vague-002",
+    "title": "Thoughts on the series so far",
+    "content": "A lot of things have happened in this series and a lot of people have opinions about it. Some of the players have been good and some of them have not been as good. That is just how it goes sometimes.\n\nThe captain has a big job to do and things like that are never easy. A lot of pressure comes with the role. In my humble opinion the team will probably be fine but you never really know. At the end of the day it is just a game and only time will tell.",
+    "category": "vague-writing",
+    "dna": { "fan": 70, "storyteller": 30 },
+    "groundTruth": { "band": "low", "vague": true }
+  },
+  {
+    "id": "eqs-vague-003",
+    "title": "Very good bowling performance",
+    "content": "The bowlers bowled very well. They took a lot of wickets and did not give away too many runs which is always a good thing in cricket. A lot of credit has to go to them for that.\n\nSome people will say the batting let them down but things like that happen. Pretty good effort overall from everyone involved. Sort of a mixed bag really but more good than bad I would say.",
+    "category": "vague-writing",
+    "dna": { "fan": 85, "analyst": 15 },
+    "groundTruth": { "band": "low", "vague": true }
+  },
+  {
+    "id": "eqs-copy-001",
+    "title": "Match report: the middle-overs squeeze",
+    "content": "Jasprit Bumrah barely bowled a yorker tonight, and that is exactly why the chase collapsed. He bowled the hard length into the surface, kept dragging the batters back across the crease, and made the short boundary irrelevant. Between overs eleven and sixteen the batters had to manufacture pace, and the false-shot rate climbed because nobody could get under the ball. The two wickets in that window were both mishits to the leg side, not beaten-for-pace dismissals. That is a bowler reading a slow pitch and adjusting, rather than repeating the plan that makes highlight reels.\n\nThe interesting question is whether this becomes the template away from home. On surfaces with more carry, the hard length sits up and gets hit. Tonight it worked because the ball gripped.",
+    "category": "copied-text",
+    "dna": { "analyst": 70, "debater": 30 },
+    "groundTruth": { "band": "low", "plagiarised": true },
+    "notes": "Verbatim copy of eqs-hq-001. Only fires once that article is in the corpus with an embedding; documents the exact-match path."
+  },
+  {
+    "id": "eqs-copy-002",
+    "title": "The quiet at Eden, retold",
+    "content": "There is a particular silence that only a full Eden Gardens can produce. It arrived in the eighteenth over, after the second six, when eighty thousand people realised the game had left them. I have sat in that upper tier since I was nine, and I have never heard the noise drain out of a ground so quickly. What I remember is not the shot. It is the man two rows down who stopped filming halfway through and just put his phone in his pocket.\n\nHis son kept asking him what the required rate was, and he kept saying it was fine, and both of them knew it was not fine.",
+    "category": "copied-text",
+    "dna": { "storyteller": 80, "fan": 20 },
+    "groundTruth": { "band": "low", "plagiarised": true },
+    "notes": "Near-verbatim reuse of eqs-hq-002 with a light reshuffle."
+  },
+  {
+    "id": "eqs-mix-001",
+    "title": "Strong opening argument, weak finish",
+    "content": "The case for batting first here is stronger than the toss data suggests. Dew has changed the second innings in four of the last five matches at this ground, and the chasing side's spinners have gone at nearly nine an over after the fifteenth.\n\nAnyway, a lot of people disagree and that is fine. At the end of the day both approaches can work and it is really just about the players on the day. Things like that are hard to predict. Only time will tell.",
+    "category": "mixed-quality",
+    "dna": { "analyst": 50, "fan": 30, "debater": 20 },
+    "groundTruth": { "band": "medium", "vague": true },
+    "notes": "Strong evidenced opening, filler close. Tests mid-band discrimination."
+  },
+  {
+    "id": "eqs-mix-002",
+    "title": "Good idea buried in a rant",
+    "content": "The rotation policy is genuinely worth arguing about. Resting a frontline seamer before a two-match series makes sense if the workload data supports it, and in this case the bowler had bowled 34 overs in nine days, which is above the threshold the medical staff have talked about publicly.\n\nBut the communication around it was terrible and the people running it clearly have no idea what they are doing. It is frustrating and honestly a bit embarrassing to follow. Sort things out.",
+    "category": "mixed-quality",
+    "dna": { "debater": 55, "fan": 45 },
+    "groundTruth": { "band": "medium", "criticalButConstructive": true },
+    "notes": "Real evidence plus hostility that stops short of abuse. Should land mid-band, not low."
+  },
+  {
+    "id": "eqs-mix-003",
+    "title": "A readable but shallow preview",
+    "content": "Both sides come into this one with something to prove. The home team have won three in a row and will fancy their chances, while the visitors have struggled away from home this season.\n\nThe key battle is probably the spinners against the middle order, since that is where games at this venue tend to be decided. Conditions look good and a decent crowd is expected. It should be a competitive match and worth watching.",
+    "category": "mixed-quality",
+    "dna": { "fan": 45, "analyst": 30, "storyteller": 25 },
+    "groundTruth": { "band": "medium" },
+    "notes": "Competent, clean, unremarkable. Should sit squarely mid-band."
+  },
+  {
+    "id": "eqs-mix-004",
+    "title": "Sharp on tactics, thin on evidence",
+    "content": "The left-arm angle is the whole reason this matchup works, and nobody seems to be talking about it. Taking the ball across the right-hander from wide of the crease turns the leg-side boundary into a bad option, and once that side is closed off the batter has to hit into the longer part of the ground.\n\nI do not have the numbers in front of me but it has felt obvious watching the last few games. It would not surprise me if the difference was significant. Either way it is a matchup worth using more often than it has been.",
+    "category": "mixed-quality",
+    "dna": { "analyst": 45, "debater": 40, "fan": 15 },
+    "groundTruth": { "band": "medium" },
+    "notes": "Good reasoning, explicitly unsupported. Evidence quality should be the limiting dimension."
+  },
+  {
+    "id": "eqs-mix-005",
+    "title": "Nostalgia that never lands a point",
+    "content": "I remember watching cricket with my grandfather on a black and white television, and the way he would go quiet during the last hour of a Test. Those afternoons shaped how I watch the game now.\n\nThe game has changed a lot since then. It is faster and louder and there is more of it. Some of that is good and some of it is not. Things like that are just part of how sport goes. Anyway, it was a nice memory and I thought I would share it.",
+    "category": "mixed-quality",
+    "dna": { "storyteller": 70, "fan": 30 },
+    "groundTruth": { "band": "medium", "vague": true },
+    "notes": "Genuine voice, no development. Tests storyteller weighting without rewarding filler."
+  },
+  {
+    "id": "eqs-hq-005",
+    "title": "Two spinners, one problem, and the matchup nobody wants",
+    "content": "Playing two wrist spinners at this ground has produced the best economy numbers in the competition and the worst record against left-handed top orders. Both things are true and the squad has been arguing past each other for a month.\n\nThe resolution is not to pick a side. It is to notice that the fixture list decides it. Three of the next four opponents open with a left-hander, and against those sides the second wrist spinner has averaged over forty. Against the fourth, he has been the best bowler on the field. Pick by opponent rather than by principle, and the argument mostly dissolves.\n\nThe objection is squad stability, and it is fair. Rotating a specialist by matchup tells him he is conditional. That is a real cost and it has to be managed honestly rather than pretended away.",
+    "category": "high-quality-human",
+    "dna": { "analyst": 45, "debater": 45, "fan": 10 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true }
+  },
+  {
+    "id": "eqs-hq-006",
+    "title": "What a twelve-year-old saw that the replay missed",
+    "content": "My daughter called the run-out before the fielder had picked the ball up. Not the throw, the run-out. She said \"he's not coming back\" while the batter was still turning, because she had been watching the non-striker's feet instead of the ball.\n\nI have watched cricket for thirty years and I watch the ball. She has watched it for two and she watches whatever is not being shown. On the replay you can see it: the non-striker takes two steps and stops, and everything after that is already decided. Broadcast never shows you that moment because the camera is following the shot.\n\nI have started watching the feet. It is a better game from there.",
+    "category": "high-quality-human",
+    "dna": { "storyteller": 60, "fan": 25, "analyst": 15 },
+    "groundTruth": { "band": "high" }
+  },
+  {
+    "id": "eqs-sarc-004",
+    "title": "Truly world-class fielding on display",
+    "content": "World-class. Genuinely world-class stuff. Dropping two at slip and then sending a throw ten metres over the keeper's head is obviously an advanced technique the rest of us are not ready for. Inspiring.\n\nOf course the real masterclass was the dive that started after the ball had already passed. Brilliant commitment. A legendary display all round and we should all be grateful we got to see it.",
+    "category": "sarcasm",
+    "dna": { "fan": 65, "debater": 35 },
+    "groundTruth": { "band": "low", "sarcastic": true, "toxic": true }
+  },
+  {
+    "id": "eqs-tox-004",
+    "title": "Absolute clown show from the coaching staff",
+    "content": "What a clown show. The coach is a complete moron and anyone who thinks otherwise is not paying attention. Stupid plans, stupid selections, stupid press conferences.\n\nShut up about process. The process is trash because the people running it are trash. Get rid of all of them.",
+    "category": "toxicity",
+    "dna": { "fan": 60, "debater": 40 },
+    "groundTruth": { "band": "low", "toxic": true }
+  },
+  {
+    "id": "eqs-stat-004",
+    "title": "A record-breaking spell nobody is talking about",
+    "content": "The figures were four overs, zero runs, six wickets. Six wickets in four overs has happened twice in the history of the format, and never with a maiden four-over spell attached to it.\n\nHis career economy now sits at 2.1 across 180 T20 matches, which is over a run better than any bowler with more than fifty games. He has taken 412 wickets in those 180 matches. There is an argument that this is the single most dominant bowling record in the sport and it is strange how little attention it gets.",
+    "category": "incorrect-stats",
+    "dna": { "analyst": 85, "debater": 15 },
+    "groundTruth": { "band": "low", "incorrectStats": true }
+  },
+  {
+    "id": "eqs-hq-007",
+    "title": "The toss matters less here than everyone insists",
+    "content": "Everyone at this ground talks about the toss, and the record does look lopsided: chasing sides have won nine of the last thirteen. But nine of those thirteen also featured a side that was already better on paper, and when you split by team strength the toss advantage mostly disappears.\n\nThat is not a claim that dew does not exist. It clearly does, and the second-innings spin economy is genuinely worse. It is a claim that the effect is smaller than a four-from-thirteen record makes it look, and that we keep attributing to conditions what was mostly just the stronger team winning.\n\nThe honest version is that the toss is worth something and not very much. That is a less satisfying story, which is probably why it is not the one being told.",
+    "category": "high-quality-human",
+    "dna": { "analyst": 55, "debater": 40, "fan": 5 },
+    "groundTruth": { "band": "high", "criticalButConstructive": true }
+  },
+  {
+    "id": "eqs-ai-004",
+    "title": "The Evolution of Batting Techniques in Contemporary Cricket",
+    "content": "Batting technique in contemporary cricket has evolved considerably. It is important to note that modern batters must navigate an increasingly complex array of bowling variations. Furthermore, the demands of multiple formats necessitate a versatility that previous generations did not require.\n\nMoreover, the intricate relationship between technical orthodoxy and innovative stroke-making underscores the multifaceted nature of the modern batting craft. Teams and coaches must carefully balance these competing considerations.\n\nIn conclusion, the evolution of batting technique is a testament to the adaptability of the modern cricketer. The sport will undoubtedly continue to witness further innovation in the years ahead.",
+    "category": "ai-paraphrase",
+    "dna": { "analyst": 60, "storyteller": 40 },
+    "groundTruth": { "band": "low", "aiAssisted": true, "vague": true }
+  }
+]

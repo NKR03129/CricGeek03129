@@ -1,0 +1,651 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String                  @id @default(cuid()) @db.VarChar(30)
+  name               String                  @db.VarChar(100)
+  email              String                  @unique @db.VarChar(255)
+  phone              String?                 @db.VarChar(20)
+  password           String                  @db.VarChar(255)
+  emailVerified      Boolean                 @default(false)
+  phoneVerified      Boolean                 @default(false)
+  role               String                  @default("user") @db.VarChar(20)
+  avatar             String?                 @db.VarChar(500)
+  bio                String?                 @db.NVarChar(Max)
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+  blogs              Blog[]
+  comments           Comment[]
+  commentarySessions LiveCommentarySession[]
+  reports            Report[]
+  achievements       WriterAchievement[]
+  badges             WriterBadge[]
+  writerDNA          WriterDNA?
+  writerProfile      WriterProfile?
+  blogReactions      BlogReaction[]
+  savedBlogs         SavedBlog[]
+  following          WriterFollow[]          @relation("WriterFollowFollower")
+  followers          WriterFollow[]          @relation("WriterFollowWriter")
+  feedPreferences    UserFeedPreference?
+  contestSubmissions ContestSubmission[]
+}
+
+model Blog {
+  id                 String              @id @default(cuid()) @db.VarChar(30)
+  title              String              @db.VarChar(200)
+  content            String              @db.NVarChar(Max)
+  excerpt            String?             @db.NVarChar(Max)
+  slug               String              @unique @db.VarChar(300)
+  status             String              @default("pending") @db.VarChar(20)
+  authorId           String              @db.VarChar(30)
+  tags               String?             @db.VarChar(500)
+  views              Int                 @default(0)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  matchTag           String?             @db.VarChar(100)
+  runs               Int                 @default(0)
+  mentionedPlayers   String?             @db.NVarChar(Max)
+  mentionedTeams     String?             @db.NVarChar(Max)
+  author             User                @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  score              BlogScore?
+  comments           Comment[]
+  reports            Report[]
+  reactions          BlogReaction[]
+  saves              SavedBlog[]
+  contestSubmissions ContestSubmission[]
+
+  @@index([authorId], map: "Blog_authorId_fkey")
+}
+
+model Comment {
+  id        String    @id @default(cuid()) @db.VarChar(30)
+  content   String    @db.NVarChar(Max)
+  blogId    String    @db.VarChar(30)
+  authorId  String    @db.VarChar(30)
+  parentId  String?   @db.VarChar(30)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  author    User      @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  blog      Blog      @relation(fields: [blogId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parent    Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("CommentReplies")
+
+  @@index([authorId], map: "Comment_authorId_fkey")
+  @@index([blogId], map: "Comment_blogId_fkey")
+  @@index([parentId], map: "Comment_parentId_fkey")
+  @@index([blogId, createdAt], map: "Comment_blogId_createdAt_idx")
+}
+
+model Report {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  reason    String   @db.VarChar(200)
+  details   String?  @db.NVarChar(Max)
+  blogId    String   @db.VarChar(30)
+  userId    String   @db.VarChar(30)
+  status    String   @default("pending") @db.VarChar(20)
+  createdAt DateTime @default(now())
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: NoAction)
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction)
+
+  @@index([blogId], map: "Report_blogId_fkey")
+  @@index([userId], map: "Report_userId_fkey")
+}
+
+model Contest {
+  id                      String              @id @default(cuid()) @db.VarChar(30)
+  title                   String              @db.VarChar(200)
+  description             String              @db.NVarChar(Max)
+  rules                   String?             @db.NVarChar(Max)
+  startDate               DateTime
+  endDate                 DateTime
+  status                  String              @default("upcoming") @db.VarChar(20)
+  prize                   String?             @db.VarChar(200)
+  shortBlogMaxWords       Int                 @default(350)
+  allowAdminOverride      Boolean             @default(true)
+  announcementTitle       String?             @db.VarChar(200)
+  announcementBody        String?             @db.NVarChar(Max)
+  announcementPublishedAt DateTime?
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
+  submissions             ContestSubmission[]
+}
+
+model ContestSubmission {
+  id                 String   @id @default(cuid()) @db.VarChar(30)
+  contestId          String   @db.VarChar(30)
+  blogId             String   @unique @db.VarChar(30)
+  authorId           String   @db.VarChar(30)
+  aiScoreSnapshot    Float    @default(0)
+  finalScore         Float    @default(0)
+  adminOverrideScore Float?
+  ranking            Int?
+  winnerPosition     Int?
+  awardedPrize       String?  @db.VarChar(200)
+  notes              String?  @db.NVarChar(Max)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  contest            Contest  @relation(fields: [contestId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  blog               Blog     @relation(fields: [blogId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  author             User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([contestId, authorId])
+  @@index([contestId, finalScore], map: "ContestSubmission_contestId_finalScore_idx")
+  @@index([contestId, ranking], map: "ContestSubmission_contestId_ranking_idx")
+}
+
+model FeaturedContent {
+  id          String   @id @default(cuid()) @db.VarChar(30)
+  title       String   @db.VarChar(200)
+  description String?  @db.NVarChar(Max)
+  imageUrl    String?  @db.VarChar(500)
+  linkUrl     String   @db.VarChar(500)
+  type        String   @db.VarChar(30)
+  priority    Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model WriterProfile {
+  id            String   @id @default(cuid()) @db.VarChar(30)
+  userId        String   @unique @db.VarChar(30)
+  averageBQS    Float    @default(0)
+  totalBlogs    Int      @default(0)
+  totalViews    Int      @default(0)
+  totalComments Int      @default(0)
+  bcs           Float    @default(0)
+  archetype     String   @default("fan") @db.VarChar(30)
+  level         Int      @default(1)
+  xp            Int      @default(0)
+  streak        Int      @default(0)
+  bestBQS       Float    @default(0)
+  featuredCount Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  statAccuracy  Float    @default(0)
+  totalRuns     Int      @default(0)
+  writerTitle   String   @default("") @db.VarChar(50)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model BlogScore {
+  id                      String   @id @default(cuid()) @db.VarChar(30)
+  blogId                  String   @unique @db.VarChar(30)
+  bqs                     Float    @default(0)
+  toneScore               Float    @default(0)
+  negativityScore         Float    @default(0)
+  toxicityScore           Float    @default(0)
+  originalityScore        Float    @default(0)
+  coherenceScore          Float    @default(0)
+  archetypeLabel          String   @default("unknown") @db.VarChar(30)
+  archetypeConfidence     Float    @default(0)
+  entitiesFound           Int      @default(0)
+  statsFound              Int      @default(0)
+  statsVerified           Int      @default(0)
+  statAccuracy            Float    @default(0)
+  constructiveness        Float    @default(0)
+  evidencePresence        Float    @default(0)
+  counterAcknowledge      Float    @default(0)
+  positionClarity         Float    @default(0)
+  infoDensity             Float    @default(0)
+  repetitionPenalty       Float    @default(0)
+  completeness            Float    @default(0)
+  paragraphScores         String?             @db.NVarChar(Max)
+  explanationJson         String?             @db.NVarChar(Max)
+  factCheckJson           String?             @db.NVarChar(Max)
+  toxicityPenaltyApplied  Boolean  @default(false)
+  toxicityPenaltyOverride Boolean  @default(false)
+  scoreVersion            String   @default("qwen3.5-v1") @db.VarChar(40)
+  wordCount               Int      @default(0)
+  lexicalDiversity        Float    @default(0)
+  sentenceVariety         Float    @default(0)
+  processingStatus        String   @default("pending") @db.VarChar(20)
+  processingTimeMs        Int      @default(0)
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  // ── EQS summary, mirrored from the latest EqsRun ──────────────────
+  // Denormalised so feed and profile queries do not need to join EqsRun.
+  eqs                     Float    @default(0)
+  eqsConfidence           Float    @default(0)
+  eqsBand                 String?  @db.VarChar(30)
+  eqsRunId                String?  @db.VarChar(30)
+  eqsRequiresReview       Boolean  @default(false)
+  eqsVersion              String?  @db.VarChar(60)
+  eqsFlagsJson            String?  @db.NVarChar(Max)
+
+  blog                    Blog     @relation(fields: [blogId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// EQS (Expression Quality Score) — spec section 11
+//
+// These tables are created at runtime by `ensureEqsTables()` in
+// `src/lib/eqs/db-schema.ts`, which is the source of truth for the DDL, and are
+// mirrored in `prisma/eqs_migration.sql`. They are declared here so the schema
+// documents the full database design and `prisma db push` stays consistent.
+// ─────────────────────────────────────────────────────────────────────
+
+/// One row per scoring pass. Holds the final score plus everything needed to
+/// re-explain it: DNA snapshot, dimensions, flags, guardrails, and versions.
+model EqsRun {
+  id                   String                 @id @db.VarChar(30)
+  blogId               String?                @db.VarChar(30)
+  writerId             String?                @db.VarChar(30)
+  contentHash          String                 @db.VarChar(64)
+  title                String?                @db.NVarChar(300)
+  wordCount            Int                    @default(0)
+  eqs                  Float                  @default(0)
+  baseScore            Float                  @default(0)
+  confidence           Float                  @default(0)
+  band                 String                 @default("") @db.VarChar(30)
+  requiresHumanReview  Boolean                @default(false)
+  humanReviewReasons   String?                @db.NVarChar(Max)
+  dnaSnapshot          String?                @db.NVarChar(Max)
+  dimensionsJson       String?                @db.NVarChar(Max)
+  flagsJson            String?                @db.NVarChar(Max)
+  guardrailsJson       String?                @db.NVarChar(Max)
+  explanationJson      String?                @db.NVarChar(Max)
+  timingsJson          String?                @db.NVarChar(Max)
+  modelVersionsJson    String?                @db.NVarChar(Max)
+  pipelineVersion      String                 @default("") @db.VarChar(60)
+  scoringConfigVersion String                 @default("") @db.VarChar(60)
+  status               String                 @default("completed") @db.VarChar(20)
+  processingTimeMs     Int                    @default(0)
+  createdAt            DateTime               @default(now())
+  components           EqsComponentResult[]
+  claims               EqsClaim[]
+  plagiarismResults    EqsPlagiarismResult[]
+  modelVersions        EqsModelVersion[]
+
+  @@index([blogId, createdAt], map: "IX_EqsRun_blogId_createdAt")
+  @@index([writerId, createdAt], map: "IX_EqsRun_writerId_createdAt")
+  @@index([contentHash], map: "IX_EqsRun_contentHash")
+  @@index([requiresHumanReview, createdAt], map: "IX_EqsRun_review_createdAt")
+}
+
+/// Normalised per-module result (spec section 7): score, confidence, evidence,
+/// flags, source, and version for each specialist system.
+model EqsComponentResult {
+  id           String   @id @db.VarChar(30)
+  runId        String   @db.VarChar(30)
+  component    String   @db.VarChar(40)
+  score        Float?
+  confidence   Float    @default(0)
+  status       String   @default("ok") @db.VarChar(20)
+  source       String   @default("") @db.VarChar(120)
+  version      String   @default("") @db.VarChar(160)
+  durationMs   Int      @default(0)
+  evidenceJson String?  @db.NVarChar(Max)
+  flagsJson    String?  @db.NVarChar(Max)
+  errorText    String?  @db.NVarChar(1000)
+  createdAt    DateTime @default(now())
+  run          EqsRun   @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId], map: "IX_EqsComponentResult_runId")
+  @@index([component, status], map: "IX_EqsComponentResult_component_status")
+}
+
+/// Extracted claims and their verification state against trusted cricket sources.
+model EqsClaim {
+  id                   String    @id @db.VarChar(30)
+  runId                String    @db.VarChar(30)
+  claimKey             String    @db.VarChar(40)
+  claimText            String    @db.NVarChar(400)
+  claimType            String    @default("general") @db.VarChar(30)
+  playerName           String?   @db.NVarChar(150)
+  metric               String?   @db.VarChar(40)
+  claimValue           Float?
+  timeframe            String?   @db.NVarChar(120)
+  requiresVerification Boolean   @default(true)
+  status               String    @default("unverified") @db.VarChar(20)
+  verificationSource   String?   @db.VarChar(60)
+  provider             String?   @db.VarChar(80)
+  evidenceJson         String?   @db.NVarChar(Max)
+  verifiedAt           DateTime?
+  createdAt            DateTime  @default(now())
+  run                  EqsRun    @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId], map: "IX_EqsClaim_runId")
+  @@index([status], map: "IX_EqsClaim_status")
+  @@index([playerName], map: "IX_EqsClaim_player")
+}
+
+/// Internal and external plagiarism findings, stored as separate rows because they
+/// are separate systems (spec section 6).
+model EqsPlagiarismResult {
+  id             String   @id @db.VarChar(30)
+  runId          String   @db.VarChar(30)
+  /// "internal" or "external".
+  kind           String   @db.VarChar(20)
+  flagged        Boolean  @default(false)
+  maxSimilarity  Float?
+  matchedPercent Float?
+  provider       String?  @db.VarChar(80)
+  matchedBlogId  String?  @db.VarChar(30)
+  matchedTitle   String?  @db.NVarChar(300)
+  matchedExcerpt String?  @db.NVarChar(Max)
+  evidenceJson   String?  @db.NVarChar(Max)
+  createdAt      DateTime @default(now())
+  run            EqsRun   @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId, kind], map: "IX_EqsPlagiarismResult_runId_kind")
+  @@index([flagged, createdAt], map: "IX_EqsPlagiarismResult_flagged")
+}
+
+/// Which model/provider/version produced each analysis stage, for auditability.
+model EqsModelVersion {
+  id            String   @id @db.VarChar(30)
+  runId         String   @db.VarChar(30)
+  stage         String   @db.VarChar(60)
+  provider      String   @db.VarChar(60)
+  model         String   @db.VarChar(160)
+  promptVersion String   @default("") @db.VarChar(60)
+  latencyMs     Int      @default(0)
+  status        String   @default("ok") @db.VarChar(20)
+  createdAt     DateTime @default(now())
+  run           EqsRun   @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId], map: "IX_EqsModelVersion_runId")
+  @@index([provider, model], map: "IX_EqsModelVersion_provider_model")
+}
+
+/// Processing events, failures, and retries. Intentionally has no foreign key to
+/// EqsRun so an event can be recorded even when the run row was never written.
+model EqsAuditEvent {
+  id         String   @id @db.VarChar(30)
+  runId      String?  @db.VarChar(30)
+  blogId     String?  @db.VarChar(30)
+  stage      String   @db.VarChar(60)
+  eventName  String   @db.VarChar(60)
+  status     String   @default("ok") @db.VarChar(20)
+  message    String?  @db.NVarChar(1000)
+  detailJson String?  @db.NVarChar(Max)
+  durationMs Int?
+  createdAt  DateTime @default(now())
+
+  @@index([runId, createdAt], map: "IX_EqsAuditEvent_runId_createdAt")
+  @@index([blogId, createdAt], map: "IX_EqsAuditEvent_blogId_createdAt")
+  @@index([stage, status], map: "IX_EqsAuditEvent_stage_status")
+}
+
+/// Writer DNA classification history, so a past EQS stays explainable after the
+/// writer's live profile has moved on.
+model WriterDNAHistory {
+  id          String   @id @db.VarChar(30)
+  userId      String   @db.VarChar(30)
+  analyst     Float    @default(0)
+  fan         Float    @default(0)
+  storyteller Float    @default(0)
+  debater     Float    @default(0)
+  source      String   @default("scoring") @db.VarChar(40)
+  reason      String?  @db.NVarChar(300)
+  blogId      String?  @db.VarChar(30)
+  eqsRunId    String?  @db.VarChar(30)
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt], map: "IX_WriterDNAHistory_userId_createdAt")
+}
+
+/// Voice-to-Commentary runs with per-stage latency, so the ~15-30s end-to-end
+/// target can be measured over time (spec section 10, stage 6).
+model VoiceCommentaryJob {
+  id                String   @id @db.VarChar(30)
+  sessionId         String?  @db.VarChar(30)
+  entryId           String?  @db.VarChar(30)
+  moderatorId       String?  @db.VarChar(30)
+  sttProvider       String   @default("none") @db.VarChar(40)
+  sttModel          String?  @db.VarChar(80)
+  transformProvider String?  @db.VarChar(40)
+  transformModel    String?  @db.VarChar(80)
+  transcriptRaw     String?  @db.NVarChar(Max)
+  transcriptCleaned String?  @db.NVarChar(Max)
+  commentaryText    String?  @db.NVarChar(Max)
+  status            String   @default("completed") @db.VarChar(20)
+  errorText         String?  @db.NVarChar(1000)
+  sttMs             Int      @default(0)
+  cleanupMs         Int      @default(0)
+  transformMs       Int      @default(0)
+  totalMs           Int      @default(0)
+  targetMs          Int      @default(0)
+  withinTarget      Boolean  @default(true)
+  createdAt         DateTime @default(now())
+
+  @@index([sessionId, createdAt], map: "IX_VoiceCommentaryJob_sessionId_createdAt")
+  @@index([status, createdAt], map: "IX_VoiceCommentaryJob_status_createdAt")
+}
+
+/// Vector index for internal plagiarism detection. Created at runtime by
+/// `ensureEmbeddingTable()` in `src/lib/internal-originality.ts`; declared here so
+/// the schema documents it.
+model ExpressionEmbedding {
+  blogId        String   @id @db.VarChar(30)
+  title         String?  @db.NVarChar(200)
+  embeddingJson String   @db.NVarChar(Max)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+
+  @@index([updatedAt], map: "IX_ExpressionEmbedding_updatedAt")
+}
+
+model WriterDNA {
+  id          String   @id @default(cuid()) @db.VarChar(30)
+  userId      String   @unique @db.VarChar(30)
+  analyst     Float    @default(25)
+  storyteller Float    @default(25)
+  debater     Float    @default(25)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  fan         Float    @default(25)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model WriterBadge {
+  id          String   @id @default(cuid()) @db.VarChar(30)
+  userId      String   @db.VarChar(30)
+  badge       String   @db.VarChar(50)
+  title       String   @db.VarChar(100)
+  description String   @db.Text
+  tier        String   @default("bronze") @db.VarChar(20)
+  iconUrl     String?  @db.VarChar(500)
+  earnedAt    DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badge])
+}
+
+model HistoricalMatch {
+  id            String                     @id @default(cuid()) @db.VarChar(30)
+  source        String                     @default("cricsheet") @db.VarChar(30)
+  sourceMatchId String                     @db.VarChar(120)
+  startedAt     DateTime?
+  season        String?                    @db.VarChar(40)
+  matchType     String?                    @db.VarChar(20)
+  eventName     String?                    @db.VarChar(200)
+  eventNameKey  String?                    @db.VarChar(200)
+  venue         String?                    @db.VarChar(200)
+  venueKey      String?                    @db.VarChar(200)
+  city          String?                    @db.VarChar(120)
+  teamA         String                     @db.VarChar(120)
+  teamAKey      String                     @db.VarChar(120)
+  teamB         String                     @db.VarChar(120)
+  teamBKey      String                     @db.VarChar(120)
+  winner        String?                    @db.VarChar(120)
+  winnerKey     String?                    @db.VarChar(120)
+  resultText    String?                    @db.VarChar(200)
+  playerOfMatch String?                    @db.VarChar(120)
+  rawInfo       String?                    @db.NVarChar(Max)
+  createdAt     DateTime                   @default(now())
+  updatedAt     DateTime                   @updatedAt
+  battingRows   HistoricalBattingInnings[]
+  bowlingRows   HistoricalBowlingInnings[]
+
+  @@unique([source, sourceMatchId], map: "HistoricalMatch_source_sourceMatchId_key")
+  @@index([matchType, startedAt], map: "HistoricalMatch_matchType_startedAt_idx")
+  @@index([teamAKey, teamBKey, startedAt], map: "HistoricalMatch_team_keys_startedAt_idx")
+  @@index([venueKey, startedAt], map: "HistoricalMatch_venueKey_startedAt_idx")
+  @@index([eventNameKey], map: "HistoricalMatch_eventNameKey_idx")
+}
+
+model HistoricalBattingInnings {
+  id                String          @id @default(cuid()) @db.VarChar(30)
+  matchId           String          @db.VarChar(30)
+  inningsNumber     Int
+  inningsTeam       String          @db.VarChar(120)
+  inningsTeamKey    String          @db.VarChar(120)
+  oppositionTeam    String?         @db.VarChar(120)
+  oppositionTeamKey String?         @db.VarChar(120)
+  playerName        String          @db.VarChar(120)
+  playerNameKey     String          @db.VarChar(120)
+  playerKey         String          @db.VarChar(120)
+  runs              Int             @default(0)
+  balls             Int             @default(0)
+  fours             Int             @default(0)
+  sixes             Int             @default(0)
+  strikeRate        Float           @default(0)
+  dismissalKind     String?         @db.VarChar(40)
+  notOut            Boolean         @default(false)
+  createdAt         DateTime        @default(now())
+  historicalMatch   HistoricalMatch @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@index([playerKey, inningsTeamKey], map: "HistoricalBattingInnings_playerKey_team_idx")
+  @@index([playerNameKey], map: "HistoricalBattingInnings_playerNameKey_idx")
+  @@index([matchId, inningsNumber], map: "HistoricalBattingInnings_match_innings_idx")
+}
+
+model HistoricalBowlingInnings {
+  id                String          @id @default(cuid()) @db.VarChar(30)
+  matchId           String          @db.VarChar(30)
+  inningsNumber     Int
+  inningsTeam       String          @db.VarChar(120)
+  inningsTeamKey    String          @db.VarChar(120)
+  oppositionTeam    String?         @db.VarChar(120)
+  oppositionTeamKey String?         @db.VarChar(120)
+  playerName        String          @db.VarChar(120)
+  playerNameKey     String          @db.VarChar(120)
+  playerKey         String          @db.VarChar(120)
+  overs             Float           @default(0)
+  maidens           Int             @default(0)
+  runsConceded      Int             @default(0)
+  wickets           Int             @default(0)
+  economy           Float           @default(0)
+  dotBalls          Int             @default(0)
+  createdAt         DateTime        @default(now())
+  historicalMatch   HistoricalMatch @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@index([playerKey, inningsTeamKey], map: "HistoricalBowlingInnings_playerKey_team_idx")
+  @@index([playerNameKey], map: "HistoricalBowlingInnings_playerNameKey_idx")
+  @@index([matchId, inningsNumber], map: "HistoricalBowlingInnings_match_innings_idx")
+}
+
+model HistoricalPlayerAlias {
+  id           String   @id @default(cuid()) @db.VarChar(30)
+  source       String   @default("cricsheet") @db.VarChar(30)
+  playerKey    String   @db.VarChar(120)
+  aliasName    String   @db.VarChar(120)
+  aliasNameKey String   @db.VarChar(120)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([playerKey, aliasNameKey], map: "HistoricalPlayerAlias_playerKey_aliasNameKey_key")
+  @@index([aliasNameKey], map: "HistoricalPlayerAlias_aliasNameKey_idx")
+}
+
+model WriterAchievement {
+  id          String   @id @default(cuid()) @db.VarChar(30)
+  userId      String   @db.VarChar(30)
+  achievement String   @db.VarChar(50)
+  title       String   @db.VarChar(100)
+  description String   @db.NVarChar(Max)
+  milestone   Int      @default(0)
+  earnedAt    DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievement])
+}
+
+model LiveCommentarySession {
+  id          String                @id @default(cuid()) @db.VarChar(30)
+  matchId     String                @db.VarChar(100)
+  matchName   String                @db.VarChar(200)
+  matchType   String                @db.VarChar(30)
+  status      String                @default("live") @db.VarChar(20)
+  moderatorId String                @db.VarChar(30)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  endedAt     DateTime?
+  entries     LiveCommentaryEntry[]
+  moderator   User                  @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([matchId])
+  @@index([moderatorId], map: "LiveCommentarySession_moderatorId_fkey")
+}
+
+model LiveCommentaryEntry {
+  id        String                @id @default(cuid()) @db.VarChar(30)
+  sessionId String                @db.VarChar(30)
+  text      String                @db.NVarChar(Max)
+  overText  String?               @db.VarChar(20)
+  source    String                @default("typed") @db.VarChar(10)
+  createdAt DateTime              @default(now())
+  session   LiveCommentarySession @relation(fields: [sessionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([sessionId, createdAt])
+}
+
+model BlogReaction {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  blogId    String   @db.VarChar(30)
+  userId    String   @db.VarChar(30)
+  type      String   @default("cricket_ball") @db.VarChar(30)
+  createdAt DateTime @default(now())
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: NoAction)
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction)
+
+  @@unique([blogId, userId])
+  @@index([userId, createdAt])
+}
+
+model SavedBlog {
+  id        String   @id @default(cuid()) @db.VarChar(30)
+  blogId    String   @db.VarChar(30)
+  userId    String   @db.VarChar(30)
+  createdAt DateTime @default(now())
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: NoAction)
+  user      User     @relation(fields: [userId], references: [id], onDelete: NoAction)
+
+  @@unique([blogId, userId])
+  @@index([userId, createdAt])
+}
+
+model WriterFollow {
+  id         String   @id @default(cuid()) @db.VarChar(30)
+  followerId String   @db.VarChar(30)
+  writerId   String   @db.VarChar(30)
+  createdAt  DateTime @default(now())
+  follower   User     @relation("WriterFollowFollower", fields: [followerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  writer     User     @relation("WriterFollowWriter", fields: [writerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([followerId, writerId])
+  @@index([writerId, createdAt])
+}
+
+model UserFeedPreference {
+  id                 String   @id @default(cuid()) @db.VarChar(30)
+  userId             String   @unique @db.VarChar(30)
+  favoriteTags       String?   @db.NVarChar(Max)
+  favoriteTeams      String?   @db.NVarChar(Max)
+  favoritePlayers    String?   @db.NVarChar(Max)
+  favoriteWriters    String?   @db.NVarChar(Max)
+  favoriteMatchTypes String?   @db.NVarChar(Max)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  user               User     @relation(fields: [userId], references: [id], onDelete: NoAction)
+}

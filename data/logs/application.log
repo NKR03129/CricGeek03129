@@ -1,0 +1,8 @@
+2024-05-02T10:15:04Z ERROR ingest.worker Failed to embed document azure_deployment.md after 3 retries
+2024-05-02T10:15:04Z WARN ingest.worker Circuit breaker opened for embedder because huggingface api latency exceeded 8s
+2024-05-02T10:15:05Z ERROR api.rag Query failed: vector index unavailable
+Traceback (most recent call last):
+  File "/app/rag_service.py", line 92, in search
+    similarity_scores, indices = index.search(query_vector, top_k)
+NameError: name 'index' is not defined
+2024-05-02T10:15:06Z INFO api.rag Query recovered after index reload succeeded

@@ -1,0 +1,123 @@
+{
+  "configVersion": "eqs-config-2026.09.1",
+  "notes": [
+    "Weights and thresholds live here, not in business logic (EQS spec section 13).",
+    "Calibrate every number in this file against the editorial benchmark set (spec section 9) before changing production behaviour.",
+    "Every dimension score is 0-100 and higher is always better. 'toxicity': 100 means no personal attacks. 'ai_assistance': 100 means no AI-generation indicators.",
+    "'sentiment' scores how well the emotional direction fits the argument in context. It is never a positive=good / negative=bad polarity score.",
+    "'ai_assistance' is deliberately absent from dnaWeights: the spec requires it to act as a bounded signal, never as a weighted rejection rule."
+  ],
+  "dnaWeights": {
+    "fan": {
+      "originality": 0.14,
+      "expression_quality": 0.14,
+      "coherence": 0.12,
+      "relevance_focus": 0.12,
+      "sentiment": 0.04,
+      "sarcasm_intent": 0.05,
+      "toxicity": 0.12,
+      "constructive_criticism": 0.1,
+      "reasoning": 0.05,
+      "evidence_quality": 0.05,
+      "statistical_claims": 0.03,
+      "writer_dna_suitability": 0.04
+    },
+    "analyst": {
+      "originality": 0.07,
+      "expression_quality": 0.1,
+      "coherence": 0.09,
+      "relevance_focus": 0.1,
+      "sentiment": 0.03,
+      "sarcasm_intent": 0.04,
+      "toxicity": 0.1,
+      "constructive_criticism": 0.07,
+      "reasoning": 0.14,
+      "evidence_quality": 0.14,
+      "statistical_claims": 0.08,
+      "writer_dna_suitability": 0.04
+    },
+    "debater": {
+      "originality": 0.07,
+      "expression_quality": 0.08,
+      "coherence": 0.11,
+      "relevance_focus": 0.1,
+      "sentiment": 0.03,
+      "sarcasm_intent": 0.06,
+      "toxicity": 0.11,
+      "constructive_criticism": 0.12,
+      "reasoning": 0.15,
+      "evidence_quality": 0.11,
+      "statistical_claims": 0.03,
+      "writer_dna_suitability": 0.03
+    },
+    "storyteller": {
+      "originality": 0.16,
+      "expression_quality": 0.14,
+      "coherence": 0.14,
+      "relevance_focus": 0.11,
+      "sentiment": 0.05,
+      "sarcasm_intent": 0.04,
+      "toxicity": 0.11,
+      "constructive_criticism": 0.06,
+      "reasoning": 0.07,
+      "evidence_quality": 0.06,
+      "statistical_claims": 0.02,
+      "writer_dna_suitability": 0.04
+    }
+  },
+  "modelInterpretation": {
+    "enabled": true,
+    "maxAdjustment": 6
+  },
+  "guardrails": {
+    "toxicity": {
+      "criticalBelow": 35,
+      "capEqsAt": 45,
+      "warnBelow": 60
+    },
+    "sarcasmIntent": {
+      "warnBelow": 45
+    },
+    "internalPlagiarism": {
+      "flaggedCapEqsAt": 45,
+      "reviewSimilarity": 0.72,
+      "exactMatchCapEqsAt": 40,
+      "exactMatchRatioThreshold": 0.35
+    },
+    "externalPlagiarism": {
+      "matchPercentThreshold": 25,
+      "capEqsAt": 45
+    },
+    "statVerification": {
+      "minContradictedToCap": 1,
+      "contradictedCapEqsAt": 60,
+      "manyContradictedCount": 3,
+      "manyContradictedCapEqsAt": 45
+    },
+    "spam": {
+      "capEqsAt": 30
+    },
+    "thinContent": {
+      "minWords": 60,
+      "capEqsAt": 55
+    },
+    "aiAssistance": {
+      "signalOnly": true,
+      "maxPenalty": 8,
+      "warnBelow": 45
+    }
+  },
+  "confidence": {
+    "humanReviewBelow": 0.5,
+    "componentUnavailablePenalty": 0.08,
+    "conflictPenalty": 0.12,
+    "floor": 0.1
+  },
+  "bands": [
+    { "minEqs": 85, "label": "exceptional" },
+    { "minEqs": 70, "label": "strong" },
+    { "minEqs": 55, "label": "publishable" },
+    { "minEqs": 40, "label": "needs-work" },
+    { "minEqs": 0, "label": "below-bar" }
+  ]
+}

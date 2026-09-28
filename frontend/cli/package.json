@@ -1,0 +1,9 @@
+{
+  "name": "rag-cli",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "query": "node index.mjs"
+  },
+  "dependencies": {}
+}
